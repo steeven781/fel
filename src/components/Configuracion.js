@@ -1,26 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Layout from '../layout/layout';
 import {useStyles} from '../layout/layoutStyle';
-import { makeStyles } from '@mui/styles';
+import fs from 'fs';
+
 import { Container, Grid, TextField, Typography, FormControl, InputLabel, Select, MenuItem, Button, Box } from '@material-ui/core';
 const axios = require('axios');
 
-const configStyle = ((makeStyles) => ({
-    form: {
-        width: '100%', // Fix IE 11 issue.
-        margin: '5'
-      },
-      formControl: {
-        //margin: theme.spacing(1),
-        minWidth: 120,
-      },
-      selectEmpty: {
-        //marginTop: theme.spacing(2),
-      },
-      secondGrid:{
-         marginTop: '8'
-      }
-}));
+
 
 
 export  const Configuracion = () =>{
@@ -53,6 +39,10 @@ export  const Configuracion = () =>{
         const sentData =(event)=>{
             event.preventDefault();
             console.log(JSON.stringify(datos));
+            fs.writeFile('./JSON/config.json',JSON.stringify(datos), function(err,result){
+                if(err) console.log('error', err);
+            })
+
         }
 
     const handleChange =(e)=>{
@@ -84,7 +74,7 @@ export  const Configuracion = () =>{
                     <Box mt={5}>
                              
                     </Box>
-                    <form className={configStyle.form} autoComplete='off' onSubmit={sentData}>
+                    <form autoComplete='off' onSubmit={sentData}>
                         <Grid container spacing={2}>
                             <Grid item  sm={6} >
                                  <TextField id="nit" name='nit' required fullWidth  label="NIT" variant="outlined" onChange={handleInputChange} />

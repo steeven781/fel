@@ -33,6 +33,7 @@ export  const Factura = () =>{
     }
 
     return ( 
+            
             <DashboardContent>
                     <main >
                             <h1>Crear Nueva Factura</h1>  
