@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Layout from '../layout/layout';
 import {useStyles} from '../layout/layoutStyle';
+import { DataGrid } from '@mui/x-data-grid';
 
 
 
@@ -92,14 +93,14 @@ export  const ListFactura = () =>{
               <div className={classes.appBarSpacer} />
                     <h1>Listado de Facturas</h1>  
                     <div style={{ height: 580, width: '100%' }}>
-                     {/* <DataGrid
+                     <DataGrid
                         rows={dummyFacturas}
                         columns={columns}
                         pageSize={10}
                         checkboxSelection
                         disableSelectionOnClick
                         
-                    />     */}
+                    />
                     </div> 
                     
             </main>
