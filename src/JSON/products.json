@@ -1,0 +1,157 @@
+[
+    {
+      "id": "1",
+      "descripcion": "Computadora DELL 500GB 4GB RAM Core i3 10ma Gen.",
+      "precio": "4250.00"
+    },
+    {
+      "id": "2",
+      "descripcion": "Computadora DELL 1TB 8GB RAM Core i5 10ma Gen.",
+      "precio": "5500.00"
+    },
+    {
+      "id": "3",
+      "descripcion": "Computadora DELL 1TB 16GB RAM Core i7 10ma Gen.",
+      "precio": "8500.00"
+    },
+    {
+      "id": "4",
+      "descripcion": "Computadora HP  500GB 4GB RAM Core i3 10ma Gen.",
+      "precio": "3850.00"
+    },
+    {
+      "id": "5",
+      "descripcion": "Computadora HP  500GB 8GB RAM Core i5 10ma Gen.",
+      "precio": "4800.00"
+    },
+    {
+      "id": "6",
+      "descripcion": "Computadora HP  1TB 16GB RAM Core i7 10ma Gen.",
+      "precio": "7000.00"
+    },
+    {
+      "id": "6",
+      "descripcion": "Computadora HP  1TB 16GB RAM Core i7 10ma Gen.",
+      "precio": "7000.00"
+    },
+    {
+      "id": "7",
+      "descripcion": "Computadora HP  1TB 16GB RAM Core i7 10ma Gen.",
+      "precio": "7000.00"
+    },
+    {
+      "id": "8",
+      "descripcion": "Mouse Optico Microsoft USB",
+      "precio": "150.00"
+    },
+    {
+      "id": "9",
+      "descripcion": "Mouse Optico KlipExtreme USB",
+      "precio": "90.00"
+    },
+    {
+      "id": "10",
+      "descripcion": "Mouse Bluetooth Microsoft",
+      "precio": "300.00"
+    },
+    {
+      "id": "11",
+      "descripcion": "Teclado USB KlipExtreme",
+      "precio": "350.00"
+    },
+    {
+      "id": "12",
+      "descripcion": "Teclado Bluetooth Logitech",
+      "precio": "550.00"
+    },
+    {
+      "id": "13",
+      "descripcion": "MousePad Gamer RGB",
+      "precio": "175.00"
+    },
+    {
+      "id": "14",
+      "descripcion": "MousePad Gel",
+      "precio": "50.00"
+    },
+    {
+      "id": "15",
+      "descripcion": "Audifonos JBL RGB Quantum 200",
+      "precio": "750.00"
+    },
+    {
+      "id": "16",
+      "descripcion": "Audifonos JBL RGB Quantum 300",
+      "precio": "950.00"
+    },
+    {
+      "id": "17",
+      "descripcion": "Audifonos JBL RGB Quantum 400",
+      "precio": "1250.00"
+    },
+    {
+      "id": "18",
+      "descripcion": "Ventilador Stand P/Laptop RGB 2 Ventiladores",
+      "precio": "270.00"
+    },
+    {
+      "id": "19",
+      "descripcion": "Ventilador Stand Laptop 4 Ventiladores Corsair",
+      "precio": "350.00"
+    },
+    {
+      "id": "20",
+      "descripcion": "Disco Duro 500GB Seagate",
+      "precio": "480.00"
+    },
+    {
+      "id": "21",
+      "descripcion": "Disco Duro 1TB Seagate",
+      "precio": "890.00"
+    },
+    {
+      "id": "22",
+      "descripcion": "Disco Duro 2TB Seagate",
+      "precio": "1280.00"
+    },
+    {
+      "id": "23",
+      "descripcion": "Memoria RAM DDR3 Corsair 4GB",
+      "precio": "280.00"
+    },
+    {
+      "id": "24",
+      "descripcion": "Memoria RAM DDR3 Corsair 8GB",
+      "precio": "600.00"
+    },
+    {
+      "id": "25",
+      "descripcion": "Memoria RAM DDR3 Corsair 16GB",
+      "precio": "950.00"
+    },
+    {
+      "id": "26",
+      "descripcion": "Memoria RAM DDR4 Corsair 4GB",
+      "precio": "350.00"
+    },
+    {
+      "id": "27",
+      "descripcion": "Memoria RAM DDR4 Corsair 8GB",
+      "precio": "600.00"
+    },
+    {
+      "id": "28",
+      "descripcion": "Memoria RAM DDR4 Corsair 16GB",
+      "precio": "1080.00"
+    },
+    {
+      "id": "29",
+      "descripcion": "USB 3.0 64GB Kingston",
+      "precio": "90.00"
+    },
+    {
+      "id": "30",
+      "descripcion": "USB 3.0 128GB Kingston",
+      "precio": "240.00"
+    }
+  ]

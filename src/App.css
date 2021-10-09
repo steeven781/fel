@@ -28,6 +28,30 @@
   color: #61dafb;
 }
 
+.MuiDataGrid-root {
+  flex: 1;
+  color: white !important;
+  border: 1px solid rgba(224, 224, 224, 1);
+  height: 100%;
+  display: flex;
+  outline: none;
+  position: relative;
+  font-size: 0.875rem;
+  box-sizing: border-box;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 400;
+  line-height: 1.43;
+  border-radius: 4px;
+  flex-direction: column;
+  letter-spacing: 0.01071em;
+}
+
+a {
+  color: white !important;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -36,3 +60,5 @@
     transform: rotate(360deg);
   }
 }
+
+

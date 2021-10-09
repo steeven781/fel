@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Layout from '../layout/layout';
-import {useStyles} from '../layout/layoutStyle';
+import { useStyles } from '../layout/layoutStyle';
 import fs from 'fs';
 
 import { Container, Grid, TextField, Typography, FormControl, InputLabel, Select, MenuItem, Button, Box } from '@material-ui/core';
@@ -9,151 +9,151 @@ const axios = require('axios');
 
 
 
-export  const Configuracion = () =>{
+export const Configuracion = () => {
     const classes = useStyles();
 
-        const [datos, setDatos] = useState({
-            nit:'',
-            afiliacion:"", 
-            nombreComercial:"",
-            nombreFiscal:"",
-            direccion:"",
-            departamento:"",
-            municipio:"", 
-            pais:"", 
-            codigoPostal:"", 
-            correoElectronico:"",
-            apiGeneral:"", 
-            apiCertificado:"",
-            prefijo:"",
-            correoCopia:""
-        })
+    const [datos, setDatos] = useState({
+        nit: '',
+        afiliacion: "",
+        nombreComercial: "",
+        nombreFiscal: "",
+        direccion: "",
+        departamento: "",
+        municipio: "",
+        pais: "",
+        codigoPostal: "",
+        correoElectronico: "",
+        apiGeneral: "",
+        apiCertificado: "",
+        prefijo: "",
+        correoCopia: ""
+    })
 
-        const handleInputChange = (event)=>{
-            setDatos({
-                ...datos,
-                [event.target.name]:event.target.value
-            })
-        }
+    const [paises, setPaises] = useState([]);
 
-        const sentData =(event)=>{
-            event.preventDefault();
-            console.log(JSON.stringify(datos));
-            fs.writeFile('./JSON/config.json',JSON.stringify(datos), function(err,result){
-                if(err) console.log('error', err);
-            })
 
-        }
-
-    const handleChange =(e)=>{
-        console.log(e.target);
-    };
-    const [pais, setPais]= useState([]);
-    useEffect(()=>{
+    useEffect(() => {
         loadCountries();
+        console.log('pais', paises);
     }, []);
 
-    const loadCountries = async () =>{
-        const result = await axios.get('https://restcountries.eu/rest/v2/all');
-        setPais(result.data);
+    const handleInputChange = (event) => {
+        setDatos({
+            ...datos,
+            [event.target.name]: event.target.value
+        });
+
+        console.log('datos', datos);
+    }
+
+    const sentData = (event) => {
+        event.preventDefault();
+        console.log(JSON.stringify(datos));
+        // fs.writeFile('./JSON/config.json', JSON.stringify(datos), function (err, result) {
+        //     if (err) console.log('error', err);
+        // })
+
+    }
+
+    const loadCountries = async () => {
+        const result = await axios.get('https://restcountries.com/v2/all');
+        setPaises(result.data);
     }
 
 
-    return (  
+    return (
         <div className={classes.root}>
-            <Layout/>
+            <Layout />
             <main className={classes.content}>
-              <div className={classes.appBarSpacer} />
-              <Container component="main" maxWidth='md'>
-                  
-              <h1>Configuracion</h1>   
-              
+                <div className={classes.appBarSpacer} />
+                <Container component="main" maxWidth='md'>
+
+                    <h1>Configuracion</h1>
+
                     <Typography>
                         Ingreso de Informacion del Emisor de la Factura
                     </Typography>
                     <Box mt={5}>
-                             
+
                     </Box>
                     <form autoComplete='off' onSubmit={sentData}>
                         <Grid container spacing={2}>
-                            <Grid item  sm={6} >
-                                 <TextField id="nit" name='nit' required fullWidth  label="NIT" variant="outlined" onChange={handleInputChange} />
+                            <Grid item sm={6} >
+                                <TextField id="nit" name='nit' required fullWidth label="NIT" variant="outlined" onChange={handleInputChange} />
                             </Grid>
                             <Grid item sm={6} >
                                 <TextField id="afiliacion" name='afiliacion' fullWidth required label="Afiliacion IVA" variant="outlined" onChange={handleInputChange} />
                             </Grid>
                             <Grid item sm={6}>
-                                <TextField id="nombreComercial" name='nombreComercial' required fullWidth label="Nombre Comercial" variant="outlined" onChange={handleInputChange}  />
+                                <TextField id="nombreComercial" name='nombreComercial' required fullWidth label="Nombre Comercial" variant="outlined" onChange={handleInputChange} />
                             </Grid>
                             <Grid item sm={6}>
-                                <TextField id="nombreFiscal" name='nombreFiscal' required fullWidth label="Nombre Fiscal" variant="outlined" onChange={handleInputChange}  />
+                                <TextField id="nombreFiscal" name='nombreFiscal' required fullWidth label="Nombre Fiscal" variant="outlined" onChange={handleInputChange} />
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField id="direccion" name='direccion' required fullWidth label="Direccion" variant="outlined" onChange={handleInputChange} />
                             </Grid>
-                            <Grid item  sm={6}>
-                                <TextField id="departameto" name='departamento' required fullWidth label="Departamento" variant="outlined" onChange={handleInputChange}  />
+                            <Grid item sm={6}>
+                                <TextField id="departameto" name='departamento' required fullWidth label="Departamento" variant="outlined" onChange={handleInputChange} />
                             </Grid>
                             <Grid item sm={6}>
-                                <TextField id="municipio" name='municipio' required fullWidth  label="Municipio" variant="outlined" onChange={handleInputChange}  />
+                                <TextField id="municipio" name='municipio' required fullWidth label="Municipio" variant="outlined" onChange={handleInputChange} />
                             </Grid>
                             <Grid item sm={6}>
-                            <Grid item sm={12}>
-                                <TextField id="pais" name='pais' required fullWidth  label="Pais" variant="outlined" onChange={handleInputChange} />
-                            </Grid>
-                             {/* <FormControl variant="filled" fullWidth className={classes.formControl}>
+                                <FormControl variant="filled" fullWidth className={classes.formControl}>
                                     <InputLabel id="demo-simple-select-filled-label">Pais</InputLabel>
                                     <Select
                                     labelId="demo-simple-select-filled-label"
                                     id="selectPais"
-                                    value={"Hola"}
-                                    onChange={handleChange}
+                                    value={paises.alpha2Code}
+                                    name={'pais'}
+                                    onChange={handleInputChange}
                                     >
                                     <MenuItem >
                                         <em>None</em>
                                     </MenuItem>
                                         {
-                                            pais.map((item)=>(
-                                                <MenuItem value={item.alpha2Code} name={item.name}>
-                                                    {item.name}
+                                            paises.map((pais)=>(
+                                                <MenuItem value={pais.alpha2Code} name={'pais'}>
+                                                    {pais.name}
                                                 </MenuItem>
                                             ))
                                         }
                                     </Select>
-                                </FormControl>  */}
+                                </FormControl>
                             </Grid>
                             <Grid item sm={6}>
-                                <TextField id="codigoPostal" name='codigoPostal' required  fullWidth label="Codigo postal" variant="outlined" onChange={handleInputChange}  />
+                                <TextField id="codigoPostal" name='codigoPostal' required fullWidth label="Codigo postal" variant="outlined" onChange={handleInputChange} />
                             </Grid>
                             <Grid item xs={12}>
-                                <TextField id="correoElectronico" name='correoElectronico' required fullWidth label="Correo Electronico" variant="outlined" onChange={handleInputChange}  />
+                                <TextField id="correoElectronico" name='correoElectronico' required fullWidth label="Correo Electronico" variant="outlined" onChange={handleInputChange} />
                             </Grid>
 
-                    </Grid>
-                                       
-                    <h1>Configuracion API Keys</h1>
+                        </Grid>
+
+                        <h1>Configuracion API Keys</h1>
                         <Typography>
-                                    Ingreso de Informacion de API Keys del Certificador
+                            Ingreso de Informacion de API Keys del Certificador
                         </Typography>
                         <Box mt={5}>
-                             
-                             </Box>
+
+                        </Box>
                         <Grid container spacing={2}>
-                        <Grid item  sm={6} >
-                                 <TextField id="apiGeneral" name='apiGeneral' required fullWidth  label="API Key General" variant="outlined" onChange={handleInputChange}  />
+                            <Grid item sm={6} >
+                                <TextField id="apiGeneral" name='apiGeneral' required fullWidth label="API Key General" variant="outlined" onChange={handleInputChange} />
                             </Grid>
                             <Grid item sm={6} >
-                                <TextField id="apiCertificado" name='apiCertificado' fullWidth required label="API Key Certificado" variant="outlined" onChange={handleInputChange}  />
+                                <TextField id="apiCertificado" name='apiCertificado' fullWidth required label="API Key Certificado" variant="outlined" onChange={handleInputChange} />
                             </Grid>
                             <Grid item sm={6}>
-                                <TextField id="prefijo" name='prefijo' required fullWidth label="Prefijo FEL" variant="outlined" onChange={handleInputChange}  />
+                                <TextField id="prefijo" name='prefijo' required fullWidth label="Prefijo FEL" variant="outlined" onChange={handleInputChange} />
                             </Grid>
                             <Grid item sm={6}>
-                                <TextField id="correoCopia" name='correoCopia' required fullWidth label="Correo PDF" variant="outlined" onChange={handleInputChange}  />
+                                <TextField id="correoCopia" name='correoCopia' required fullWidth label="Correo PDF" variant="outlined" onChange={handleInputChange} />
                             </Grid>
                             <Box mt={14}>
-                             
-                             </Box>
+
+                            </Box>
                             <Button
                                 type="submit"
                                 fullWidth
@@ -163,23 +163,23 @@ export  const Configuracion = () =>{
                             >
                                 Guardar
                             </Button>
-                            
+
                         </Grid>
-                        
-                        
-                </form>
-               
-                        
 
-                    
-              </Container>
-              <Box mt={10}>
-                             
-              </Box>
 
-             
+                    </form>
+
+
+
+
+                </Container>
+                <Box mt={10}>
+
+                </Box>
+
+
             </main>
-           
+
         </div>
     );
 }
