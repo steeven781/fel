@@ -74,7 +74,6 @@ export const Factura = () => {
   // useEffect(() => {}, [productos])
   useEffect(() => {
     loadProducts();
-  
     }, []);
 
   const [datosCliente, setDatosCliente] = useState({
@@ -100,52 +99,37 @@ export const Factura = () => {
       ...datosCliente,
       [event.target.name]: event.target.value
     })
-
-    console.log('datosCliente', datosCliente);
   }
 
   const prodValuesInputChange = (event, index) => {
-    // console.log('Valor Descripcion:',event.target.value);
-    // console.log('Valor Nombre:',event.target.name);
-    // console.log('Indice', index);
-    console.log('Valores',event.target.name,event.target.value)
+    const producto = descripcionProductos.find((producto) => producto.descripcion === event.target.value);
+
     let modifyProducts = [...productos];
-    if(modifyProducts[index].name=="descripcion "){
-      modifyProducts[index].descripcion=event.target.value
-      console.log('modificada',modifyProducts[index].descripcion)
+
+    for (const [indexProducto] of modifyProducts.entries()) {
+      if (indexProducto === index) {
+        modifyProducts[index][event.target.name] = event.target.value;
+
+        if (!!producto) {
+          const { precio } = producto;
+          if (event.target.name === 'descripcion') {
+            modifyProducts[index]['precioUnitario'] = precio;
+          }
+        }
+
+        if (modifyProducts[index]['cantidad'] && modifyProducts[index]['precioUnitario']) {
+          modifyProducts[index]['precio'] = (+modifyProducts[index]['cantidad']) * (+modifyProducts[index]['precioUnitario']);
+          modifyProducts[index]['total'] = (+modifyProducts[index]['cantidad']) * (+modifyProducts[index]['precioUnitario']);
+        }
+
+      }
     }
 
-    if(event.target.name=="cantidad"){
-      modifyProducts[index].cantidad=event.target.value;
-      console.log('Entro en Cantidad, Actual:', modifyProducts[index].cantidad);
-    }
-
-    if(event.target.name=="precioUnitario"){
-      modifyProducts[index].precioUnitario=event.target.value;
-      console.log('Entro en Precio Unitario, Actual:', modifyProducts[index].precioUnitario);
-    }
-
-    if((modifyProducts[index].cantidad && modifyProducts[index].precioUnitario)>1){
-      console.log('La cantidad y el precio son mayor a uno');
-      modifyProducts[index].precio = modifyProducts[index].cantidad*modifyProducts[index].precioUnitario;
-      modifyProducts[index].total=modifyProducts[index].precio;
-    }
-
-    console.log('productos', modifyProducts);
-    // setProductos({
-    //   ...modifyProducts[index],
-    //   [event.target.name]: event.target.value
-    // })
-
-    // setProductos({
-    //   ...productos,
-    //   [event.target.name]: event.target.value
-    // })
+    setProductos(modifyProducts);
   }
 
 
   const loadProducts = () => {
-    console.log(descripcionProductos);
     setDescripciones(descripcionProductos);
 }
 
@@ -242,7 +226,7 @@ export const Factura = () => {
               productos.map((producto, index) => (
                 <Fragment>
                   <Grid item sm={2} >
-                    <TextField required id="cantidad" name='cantidad' defaultValue='1.00' fullWidth label={`Linea ${index+1}`} variant="outlined" onChange={(event)=>{prodValuesInputChange(event, index)}} />
+                    <TextField required id="cantidad" name='cantidad' defaultValue='' placeholder={'1'} value={producto.cantidad} fullWidth label={`Linea ${index+1}`} variant="outlined" onChange={(event)=>{prodValuesInputChange(event, index)}} />
                   </Grid>
                   {/* <Grid item sm={4} >
                     <TextField required id="descripcion" name='descripcion' defaultValue={`Producto ${index+1}`} fullWidth label={`Descripcion ${index+1}`} variant="outlined" onChange="" />
@@ -253,7 +237,7 @@ export const Factura = () => {
                                     <Select
                                     labelId="demo-simple-select-filled-label"
                                     id="selectDescripcion"
-                                    value={descripciones.descripcion}
+                                    value={producto.descripcion}
                                     name={'descripcion'}
                                     onChange={(event)=>{prodValuesInputChange(event, index)}}
                                     >
@@ -271,13 +255,13 @@ export const Factura = () => {
                                 </FormControl>
                   </Grid>
                   <Grid item sm={2} >
-                    <TextField required id="precioUnitario" name='precioUnitario' defaultValue='1.00' fullWidth label={`P. Unitario ${index+1}`} variant="outlined" onChange={(event)=>{prodValuesInputChange(event, index)}} />
+                    <TextField required id="precioUnitario" name='precioUnitario' defaultValue='' value={producto.precioUnitario} fullWidth label={`P. Unitario ${index+1}`} variant="outlined" onChange={(event)=>{prodValuesInputChange(event, index)}} />
                   </Grid>
                   <Grid item sm={2} >
-                    <TextField   id="precio" name='precio' defaultValue='0.00' value={producto.precio} InputProps={{ readOnly: true, }} fullWidth label={`Precio ${index+1}`} variant="outlined" onChange={(event)=>{prodValuesInputChange(event, index)}} />
+                    <TextField   id="precio" name='precio' defaultValue='' value={producto.precio} InputProps={{ readOnly: true, }} fullWidth label={`Precio ${index+1}`} variant="outlined" onChange={(event)=>{prodValuesInputChange(event, index)}} />
                   </Grid>
                   <Grid item sm={2} >
-                    <TextField  id="total" name='total' defaultValue='0.00' value={producto.total} InputProps={{ readOnly: true, }} fullWidth label={`Total ${index+1}`} variant="outlined" onChange={(event)=>{prodValuesInputChange(event, index)}} />
+                    <TextField  id="total" name='total' defaultValue='' value={producto.total} InputProps={{ readOnly: true, }} fullWidth label={`Total ${index+1}`} variant="outlined" onChange={(event)=>{prodValuesInputChange(event, index)}} />
                   </Grid>
                 </Fragment>
               ))
