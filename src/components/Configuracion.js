@@ -7,26 +7,26 @@ import { Container, Grid, TextField, Typography, FormControl, InputLabel, Select
 const axios = require('axios');
 
 
-
+const initialConfig = JSON.parse(localStorage.getItem('jsonConfiguracion')) || {};
 
 export const Configuracion = () => {
     const classes = useStyles();
 
     const [datos, setDatos] = useState({
         nit: '',
-        afiliacion: "",
-        nombreComercial: "",
-        nombreFiscal: "",
-        direccion: "",
-        departamento: "",
-        municipio: "",
-        pais: "",
-        codigoPostal: "",
-        correoElectronico: "",
-        apiGeneral: "",
-        apiCertificado: "",
-        prefijo: "",
-        correoCopia: ""
+        afiliacion: '',
+        nombreComercial: '',
+        nombreFiscal: '',
+        direccion: '',
+        departamento: '',
+        municipio: '',
+        pais: '',
+        codigoPostal: '',
+        correoElectronico: '',
+        apiGeneral: '',
+        apiCertificado: '',
+        prefijo: '',
+        correoCopia: ''
     })
 
     const [paises, setPaises] = useState([]);
@@ -34,10 +34,13 @@ export const Configuracion = () => {
 
     useEffect(() => {
         loadCountries();
-        console.log('pais', paises);
+       // console.log('pais', paises);
+        setDatos(initialConfig);
+       // console.log('datos', datos)
     }, []);
 
     const handleInputChange = (event) => {
+        console.log(event.target.value)
         setDatos({
             ...datos,
             [event.target.name]: event.target.value
@@ -48,11 +51,9 @@ export const Configuracion = () => {
 
     const sentData = (event) => {
         event.preventDefault();
-        console.log(JSON.stringify(datos));
-        // fs.writeFile('./JSON/config.json', JSON.stringify(datos), function (err, result) {
-        //     if (err) console.log('error', err);
-        // })
-
+       // console.log(JSON.stringify(datos));
+        localStorage.setItem('jsonConfiguracion', JSON.stringify(datos));
+        
     }
 
     const loadCountries = async () => {
@@ -79,25 +80,25 @@ export const Configuracion = () => {
                     <form autoComplete='off' onSubmit={sentData}>
                         <Grid container spacing={2}>
                             <Grid item sm={6} >
-                                <TextField id="nit" name='nit' required fullWidth label="NIT" variant="outlined" onChange={handleInputChange} />
+                                <TextField id="nit" name='nit' required fullWidth label="NIT" value={datos.nit} variant="outlined" onChange={handleInputChange} />
                             </Grid>
                             <Grid item sm={6} >
-                                <TextField id="afiliacion" name='afiliacion' fullWidth required label="Afiliacion IVA" variant="outlined" onChange={handleInputChange} />
+                                <TextField id="afiliacion" name='afiliacion' fullWidth required value={datos.afiliacion} label="Afiliacion IVA" variant="outlined" onChange={handleInputChange} />
                             </Grid>
                             <Grid item sm={6}>
-                                <TextField id="nombreComercial" name='nombreComercial' required fullWidth label="Nombre Comercial" variant="outlined" onChange={handleInputChange} />
+                                <TextField id="nombreComercial" name='nombreComercial' required fullWidth value={datos.nombreComercial} label="Nombre Comercial" variant="outlined" onChange={handleInputChange} />
                             </Grid>
                             <Grid item sm={6}>
-                                <TextField id="nombreFiscal" name='nombreFiscal' required fullWidth label="Nombre Fiscal" variant="outlined" onChange={handleInputChange} />
+                                <TextField id="nombreFiscal" name='nombreFiscal' required fullWidth value={datos.nombreFiscal} label="Nombre Fiscal" variant="outlined" onChange={handleInputChange} />
                             </Grid>
                             <Grid item xs={12}>
-                                <TextField id="direccion" name='direccion' required fullWidth label="Direccion" variant="outlined" onChange={handleInputChange} />
+                                <TextField id="direccion" name='direccion' required fullWidth value={datos.direccion} label="Direccion" variant="outlined" onChange={handleInputChange} />
                             </Grid>
                             <Grid item sm={6}>
-                                <TextField id="departameto" name='departamento' required fullWidth label="Departamento" variant="outlined" onChange={handleInputChange} />
+                                <TextField id="departameto" name='departamento' required fullWidth value={datos.departamento} label="Departamento" variant="outlined" onChange={handleInputChange} />
                             </Grid>
                             <Grid item sm={6}>
-                                <TextField id="municipio" name='municipio' required fullWidth label="Municipio" variant="outlined" onChange={handleInputChange} />
+                                <TextField id="municipio" name='municipio' required fullWidth label="Municipio" value={datos.municipio} variant="outlined" onChange={handleInputChange} />
                             </Grid>
                             <Grid item sm={6}>
                                 <FormControl variant="filled" fullWidth className={classes.formControl}>
@@ -105,12 +106,13 @@ export const Configuracion = () => {
                                     <Select
                                     labelId="demo-simple-select-filled-label"
                                     id="selectPais"
-                                    value={paises.alpha2Code}
+                                     value={datos.pais}
                                     name={'pais'}
                                     onChange={handleInputChange}
+
                                     >
                                     <MenuItem >
-                                        <em>None</em>
+                                       None
                                     </MenuItem>
                                         {
                                             paises.map((pais)=>(
@@ -123,10 +125,10 @@ export const Configuracion = () => {
                                 </FormControl>
                             </Grid>
                             <Grid item sm={6}>
-                                <TextField id="codigoPostal" name='codigoPostal' required fullWidth label="Codigo postal" variant="outlined" onChange={handleInputChange} />
+                                <TextField id="codigoPostal" name='codigoPostal' value={datos.codigoPostal} required fullWidth label="Codigo postal" variant="outlined" onChange={handleInputChange} />
                             </Grid>
                             <Grid item xs={12}>
-                                <TextField id="correoElectronico" name='correoElectronico' required fullWidth label="Correo Electronico" variant="outlined" onChange={handleInputChange} />
+                                <TextField id="correoElectronico" name='correoElectronico' value={datos.correoElectronico} required fullWidth label="Correo Electronico" variant="outlined" onChange={handleInputChange} />
                             </Grid>
 
                         </Grid>
@@ -140,16 +142,16 @@ export const Configuracion = () => {
                         </Box>
                         <Grid container spacing={2}>
                             <Grid item sm={6} >
-                                <TextField id="apiGeneral" name='apiGeneral' required fullWidth label="API Key General" variant="outlined" onChange={handleInputChange} />
+                                <TextField id="apiGeneral" name='apiGeneral' value={datos.apiGeneral} required fullWidth label="API Key General" variant="outlined" onChange={handleInputChange} />
                             </Grid>
                             <Grid item sm={6} >
-                                <TextField id="apiCertificado" name='apiCertificado' fullWidth required label="API Key Certificado" variant="outlined" onChange={handleInputChange} />
+                                <TextField id="apiCertificado" name='apiCertificado' value={datos.apiCertificado} fullWidth required label="API Key Certificado" variant="outlined" onChange={handleInputChange} />
                             </Grid>
                             <Grid item sm={6}>
-                                <TextField id="prefijo" name='prefijo' required fullWidth label="Prefijo FEL" variant="outlined" onChange={handleInputChange} />
+                                <TextField id="prefijo" name='prefijo' value={datos.prefijo} required fullWidth label="Prefijo FEL" variant="outlined" onChange={handleInputChange} />
                             </Grid>
                             <Grid item sm={6}>
-                                <TextField id="correoCopia" name='correoCopia' required fullWidth label="Correo PDF" variant="outlined" onChange={handleInputChange} />
+                                <TextField id="correoCopia" name='correoCopia' value={datos.correoCopia} required fullWidth label="Correo PDF" variant="outlined" onChange={handleInputChange} />
                             </Grid>
                             <Box mt={14}>
 

@@ -26,6 +26,7 @@ export const Factura = () => {
     departamentoEmisor:'Guatemala',
     paisEmisor:'GT',
     correoReceptor:'demo@demo.com',
+    /* DATOS EN ESTA PANTALLA */
     nitReceptor:'CF',
     nombreReceptor:'Consumidor Final',
     direccionReceptor:'CIUDAD',
@@ -33,6 +34,7 @@ export const Factura = () => {
     municipioReceptor:'Guatemala',
     departamentoReceptor:'Guatemala',
     paisReceptor:'GT',
+    /** DATOS ITEMS ARREGLO */
     bienOServicio:'B',
     numeroLinea:'1',
     cantidad:'3.00',
@@ -46,6 +48,7 @@ export const Factura = () => {
     montoSinIVA:'1473.214286',
     montoIVA:'176.785714',
     totalLinea:'1650.00',
+    /* TOTALES */
     totalImpuesto:'176.785714',
     totalDocumento:'1650.00'
 }
@@ -107,7 +110,7 @@ export const Factura = () => {
     // console.log('Indice', index);
     console.log('Valores',event.target.name,event.target.value)
     let modifyProducts = [...productos];
-    if(modifyProducts[index].descripcion==""){
+    if(modifyProducts[index].name=="descripcion "){
       modifyProducts[index].descripcion=event.target.value
       console.log('modificada',modifyProducts[index].descripcion)
     }
@@ -258,9 +261,9 @@ export const Factura = () => {
                                         <em>None</em>
                                     </MenuItem>
                                         {
-                                            descripciones.map((descripcion)=>(
-                                                <MenuItem value={descripcion.descripcion} name={'descripcion'}>
-                                                    {descripcion.descripcion}
+                                            descripciones.map((descr)=>(
+                                                <MenuItem value={descr.descripcion} name={'descripcion'}>
+                                                    {descr.descripcion}
                                                 </MenuItem>
                                             ))
                                         }
