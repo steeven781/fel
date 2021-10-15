@@ -1,48 +1,34 @@
-import { handleBreakpoints } from '@mui/system';
-import React, {useEffect, useState} from 'react';
+
 const axios = require('axios');
 
+const config = JSON.parse(localStorage.getItem('jsonConfiguracion')) || {};
 
 
- const signerFile = (xmlFileEncode) =>{
 
 
+ const signerFile = async (xmlFileEncode) =>{
+
+  
     const jsonPostFile={
-        llave:'da4d96099feaec40dce27b6143acc7be',
+        llave: config.apiCertificado,
         archivo: xmlFileEncode,
-        alias: "43213502",
+        alias: config.prefijo,
         es_anulacion:'N'
     }
 
+
     const jsonPost = JSON.stringify(jsonPostFile);
-    // const headers = {
-    //     'Access-Control-Allow-Origin': '*',
-    //     'Content-Type': 'application/json',
-    // }
-    const options = {
-        method: 'post',
-        url: 'https://signer-emisores.feel.com.gt/sign_solicitud_firmas/firma_xml',
-        data: jsonPost,
-        headers:{
-            'Access-Control-Allow-Origin': '*',
-            'Content-Type': 'application/json',
-        },
-        transformRequest: [(data, headers) => {
-          // transform the data
-      
-          return data;
-        }]
-      };
 
-      axios(options);
-    // axios.post('https://signer-emisores.feel.com.gt/sign_solicitud_firmas/firma_xml',  jsonPost,{headers})
-    // .then((result) => {
-    //     console.log(result);
-    // }).catch((err) => {
-    //     console.log('Error', err);   
-    // });
-
-   
+        const headers = {
+     
+      'content-type': "application/json",
+      'Access-Control-Allow-Origin':"*",
+      "Access-Control-Allow-Methods": "DELETE, POST, GET, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
+    }
+    const response = await axios.post('https://signer-emisores.feel.com.gt/sign_solicitud_firmas/firma_xml',jsonPost,{headers});
+    const result = response.data;
+    return result  
 }
 export default signerFile;
 

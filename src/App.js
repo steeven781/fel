@@ -1,11 +1,13 @@
 
 import './App.css';
 import { BrowserRouter } from 'react-router-dom';
-
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Routes from './Routes';
+import { ToastContainer, toast } from 'react-toastify';
 
+
+ 
 
 function App() {
 
@@ -32,6 +34,7 @@ function App() {
       <div className="App">
         <BrowserRouter>
           <Routes />
+          <ToastContainer/>
         </BrowserRouter>
       </div>
     </ThemeProvider>
